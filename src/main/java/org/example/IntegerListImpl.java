@@ -6,9 +6,8 @@ import org.example.exeptions.NumberNotFoundExeption;
 import java.util.Arrays;
 
 public class IntegerListImpl implements IntegerList{
-    int length = 5;
 
-    Integer[] numbers = new Integer[length];
+    Integer[] numbers = new Integer[5];
     public static void quickSort(Integer[] arr, int begin, int end) {
         if (begin < end) {
             Integer partitionIndex = partition(arr, begin, end);
@@ -38,8 +37,9 @@ public class IntegerListImpl implements IntegerList{
         arr[indexA] = arr[indexB];
         arr[indexB] = tmp;
     }
-    private static void grow (int len) {
-        len = (int) (len * 1.5);
+    private Integer[] grow (Integer[] arr) {
+        Integer[] newNumbers = Arrays.copyOf(arr, (int) (arr.length * 1.5));
+        return newNumbers;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class IntegerListImpl implements IntegerList{
             }
         }
         if (arrIsFull == true) {
-            grow(length);
+            grow(numbers);
         }
         for (int j = 0; j < numbers.length; j++) {
             if (numbers[j] == null) {
@@ -70,7 +70,7 @@ public class IntegerListImpl implements IntegerList{
     @Override
     public Integer addToSpecCell(int index, Integer number) {
         if (index > numbers.length - 1) {
-            grow(length);
+            grow(numbers);
         }
         if (numbers[index] == null) {
             numbers[index] = number;
