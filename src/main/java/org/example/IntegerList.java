@@ -15,6 +15,7 @@ public interface IntegerList {
     void clear();
     Integer[] toArray();
     boolean containsBin(Integer element);
+    void recursionSort();
 
 }
 

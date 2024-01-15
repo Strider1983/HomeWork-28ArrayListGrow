@@ -6,20 +6,61 @@ import org.example.exeptions.NumberNotFoundExeption;
 import java.util.Arrays;
 
 public class IntegerListImpl implements IntegerList{
+    int length = 5;
 
-    Integer[] numbers = new Integer[5];
+    Integer[] numbers = new Integer[length];
+    public static void quickSort(Integer[] arr, int begin, int end) {
+        if (begin < end) {
+            Integer partitionIndex = partition(arr, begin, end);
+
+            quickSort(arr, begin, partitionIndex - 1);
+            quickSort(arr, partitionIndex + 1, end);
+        }
+    }
+
+    private static int partition(Integer[] arr, int begin, int end) {
+        int pivot = arr[end];
+        int i = (begin - 1);
+
+        for (int j = begin; j < end; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+
+                swapElements(arr, i, j);
+            }
+        }
+
+        swapElements(arr, i + 1, end);
+        return i + 1;
+    }
     private static void swapElements(Integer[] arr, int indexA, int indexB) {
         int tmp = arr[indexA];
         arr[indexA] = arr[indexB];
         arr[indexB] = tmp;
     }
+    private static void grow (int len) {
+        len = (int) (len * 1.5);
+    }
 
+    @Override
+    public void recursionSort() {
+        quickSort(numbers, 0, numbers.length - 1);
+    }
 
     @Override
     public Integer add(Integer number) {
+        boolean arrIsFull = false;
         for (int i = 0; i < numbers.length; i++) {
             if (numbers[i] == null) {
-                numbers[i] = number;
+                arrIsFull = true;
+            }
+        }
+        if (arrIsFull == true) {
+            grow(length);
+        }
+        for (int j = 0; j < numbers.length; j++) {
+            if (numbers[j] == null) {
+                numbers[j] = number;
                 break;
             }
         }
@@ -28,6 +69,9 @@ public class IntegerListImpl implements IntegerList{
 
     @Override
     public Integer addToSpecCell(int index, Integer number) {
+        if (index > numbers.length - 1) {
+            grow(length);
+        }
         if (numbers[index] == null) {
             numbers[index] = number;
         }

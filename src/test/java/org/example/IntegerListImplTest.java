@@ -120,5 +120,21 @@ public class IntegerListImplTest {
         boolean actualContain = integerList.containsBin(73);
         Assertions.assertEquals(contain, actualContain);
     }
+    @Test
+    public void checkRecorsion() {
+        boolean equal = true;
+        Integer[] nums = new Integer[] {1, 2, 3, 4, 5};
+        integerList.addToSpecCell(0, 2);
+        integerList.addToSpecCell(1, 4);
+        integerList.addToSpecCell(2, 3);
+        integerList.addToSpecCell(3, 5);
+        integerList.addToSpecCell(4, 1);
+
+
+        integerList.recursionSort();
+        Integer[] actualNumbers = integerList.toArray();
+        boolean actualEqual = Arrays.equals(nums, actualNumbers);
+        Assertions.assertEquals(equal, actualEqual);
+    }
 
 }
