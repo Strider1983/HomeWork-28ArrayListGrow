@@ -37,9 +37,10 @@ public class IntegerListImpl implements IntegerList{
         arr[indexA] = arr[indexB];
         arr[indexB] = tmp;
     }
-    private Integer[] grow (Integer[] arr) {
-        Integer[] newNumbers = Arrays.copyOf(arr, (int) (arr.length * 1.5));
-        return newNumbers;
+    private void grow (Integer[] arr) {
+        Integer[] newNumbers = Arrays.copyOf(arr, (int) (arr.length + arr.length / 1.5));
+        arr = newNumbers;
+        newNumbers = null;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class IntegerListImpl implements IntegerList{
     public Integer add(Integer number) {
         boolean arrIsFull = false;
         for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] == null) {
+            if (numbers[i] != null) {
                 arrIsFull = true;
             }
         }

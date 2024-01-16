@@ -13,8 +13,7 @@ public class Main {
         integerList.add(2);
         integerList.add(2);
 
-        Integer[] nums = integerList.toArray();
-        System.out.println(Arrays.toString(nums));
+
 
     }
 }
